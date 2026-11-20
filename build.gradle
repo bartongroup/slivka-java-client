@@ -52,7 +52,7 @@ dependencies {
 }
 
 group = 'uk.ac.dundee.compbio'
-version = '0.0.1-SNAPSHOT'
+version = '0.8.5b9'
 description = 'A Java Client for Slivka Services'
 java.sourceCompatibility = JavaVersion.VERSION_11
 

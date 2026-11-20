@@ -52,7 +52,7 @@ swingjs {
 
 	appName = "slivka-javajs-client" // no spaces
 
-	mainClass = "uk.ac.dundee.compbio.slivkaclient.SlivkaClient"
+	mainClass = "uk.ac.dundee.compbio.slivkaclient.SlivkaClientImpl"
 
 	archiveFileName = "slivka-javajs-client-site.tar.gz"
 
@@ -72,7 +72,7 @@ swingjs {
 	}
 	chromeBinary = chromeExe
 
-	chromeTestOutputString = "JALVIEWJS: CREATED DESKTOP"
+	chromeTestOutputString = "Slivka Service Discovery Finished."
 }
 
 tasks.register("prepareSwingJsTests", Copy) {

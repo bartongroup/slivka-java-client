@@ -41,7 +41,7 @@ import static java.lang.String.format;
 
 public class SlivkaClientImpl implements SlivkaClient
 {
-
+  private static String DEFAULT_SLIVKA_URL="https://www.compbio.dundee.ac.uk/slivka";
   private URI url;
 
   private HttpClient httpClient;
@@ -393,5 +393,29 @@ public class SlivkaClientImpl implements SlivkaClient
   public String toString()
   {
     return format("SlivkaClient(%s)", url.toString());
+  }
+  
+  public static void main(String[] args) {
+    if (args.length>1)
+    {
+      System.err.println("Need just one argument: <slivka server api url>\n  Default is "+DEFAULT_SLIVKA_URL);
+      System.exit(1);
+    }
+    String slivkaServiceUrl = args.length==0 ? DEFAULT_SLIVKA_URL: args[0];
+    SlivkaClient client = SlivkaClient.newInstance(slivkaServiceUrl);
+    System.out.println("Enumerating services at "+slivkaServiceUrl);
+    try {
+      for (SlivkaService service:client.getServices())
+      {
+        System.out.println("Service: '"+service.getName()+"' "+service.toString());
+      }
+    } catch (IOException x)
+    {
+      System.err.println("Exception when trying to reach "+slivkaServiceUrl);
+      x.printStackTrace();
+      System.exit(1);
+    }
+    System.out.println("Slivka Service Discovery Finished."); // we look for this in the swingjs test
+    System.exit(0);
   }
 }
