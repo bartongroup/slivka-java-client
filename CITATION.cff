@@ -1,0 +1,39 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: 'Slivka java client: accessing slivka services from Java and SwingJS'
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Mateusz
+    family-names: Warowny
+    orcid: 'https://orcid.org/0009-0009-4350-9687'
+  - given-names: James (Jim)
+    name-particle: B.
+    family-names: Procter
+    orcid: 'https://orcid.org/0000-0002-7865-7382'
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.24371045
+    description: canonical DOI for slivka framework
+  - type: doi
+    value: 10.5281/zenodo.24399916
+    description: DOI for the slivka java client component
+  - type: doi
+    value: 10.64898/2026.05.23.727389
+    description: The slivka and slivka-bio preprint
+repository-code: 'https://github.com/bartongroup/slivka-java-client'
+url: 'https://www.compbio.dundee.ac.uk/slivka'
+abstract: >-
+  A minimal java client and SwingJS transpiled library for
+  discovery and use of web services provided by the slivka
+  framework
+keywords:
+  - Executable-As-A-Service
+  - REST-API
+  - distributed execution
+  - semantic web services
+license: Apache-2.0

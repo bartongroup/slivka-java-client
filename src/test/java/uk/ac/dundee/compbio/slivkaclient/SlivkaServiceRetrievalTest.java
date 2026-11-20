@@ -1,35 +1,43 @@
 package uk.ac.dundee.compbio.slivkaclient;
 
+import java.io.IOException;
+import java.net.URI;
+import java.util.List;
 import javajs.http.HttpClientFactory;
+
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
-import java.net.URI;
-import java.util.List;
-
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
-public class SlivkaServiceRetrievalTest {
+public class SlivkaServiceRetrievalTest
+{
 
   private SlivkaClient client = null;
+
   private final HttpClientStub httpClient = new HttpClientStub();
-  private static final URI slivkaUrl = URI.create("http://example.org/slivka/");
+
+  private static final URI slivkaUrl = URI
+          .create("http://example.org/slivka/");
+
   private HttpClientStub.HttpRequestMock req = null;
+
   private HttpClientStub.HttpResponseMock rep = null;
 
   @BeforeClass
-  public void setUpClass() {
+  public void setUpClass()
+  {
     HttpClientFactory.setDefaultClassName(HttpClientStub.class.getName());
-    client = new SlivkaClient(slivkaUrl);
+    client = SlivkaClient.newInstance(slivkaUrl);
     client.setHttpClient(httpClient);
   }
 
   @BeforeMethod
-  public void setUp() {
+  public void setUp()
+  {
     req = new HttpClientStub.HttpRequestMock();
     rep = new HttpClientStub.HttpResponseMock();
     rep.setStatusCode(200);
@@ -40,65 +48,91 @@ public class SlivkaServiceRetrievalTest {
   }
 
   @AfterMethod
-  public void tearDown() {
-    try {
+  public void tearDown()
+  {
+    try
+    {
       rep.close();
-    } catch (IOException ioe) {
+    } catch (IOException ioe)
+    {
       ioe.printStackTrace();
     }
   }
 
-  @Test
-  public void testServiceListRequest() {
-    try {
-      client.getServices();
-      assertEquals(req.getUri(), slivkaUrl.resolve("api/services"));
-      assertEquals(req.getMethod(), "GET");
-    } catch (IOException ioe) {
+  @Test(priority = -1)
+  public void testServiceListRequest()
+  {
+    try
+    {
+      HttpClientStub.HttpRequestMock ourreq = req;
+      synchronized (ourreq)
+      {
+        client.getServices();
+        assertEquals(ourreq.getUri(), slivkaUrl.resolve("api/services"));
+        assertEquals(ourreq.getMethod(), "GET");
+      }
+
+    } catch (IOException ioe)
+    {
       fail("connection error", ioe);
     }
   }
 
   @Test
-  public void testGetServicesList() {
-    try {
+  public void testGetServicesList()
+  {
+    try
+    {
       var services = client.getServices();
-      var actual = services.stream()
-          .map(SlivkaService::getName)
-          .toArray();
-      var expected = new String[]{"service-1", "service-2"};
+      var actual = services.stream().map(SlivkaService::getName).toArray();
+      var expected = new String[] { "Example Service", "MUSCLE", "GlobPlot",
+          "Jronn", "AACon", "TCoffee", "MAFFT", "ClustalO", "MSAProbs",
+          "DisEMBL", "RNAalifold", "ProbCons", "JPred", "IUPred",
+          "ClustalW" };
       assertEquals(actual, expected);
-    } catch (IOException ioe) {
+    } catch (IOException ioe)
+    {
       fail("connection error", ioe);
     }
   }
 
   @Test
-  public void testServiceLabel() {
-    try {
-      var service = client.getService("service-1");
-      assertEquals(service.getLabel(), "Service One");
-    } catch (IOException ioe) {
+  public void testServiceLabel()
+  {
+    try
+    {
+      var service = client.getService("example");
+      assertEquals(service.getId(), "example");
+    } catch (IOException ioe)
+    {
       fail("connection error", ioe);
     }
   }
 
   @Test
-  public void testServiceClassifiers() {
-    try {
-      var service = client.getService("service-1");
-      assertEquals(service.getClassifiers(), List.of("Type=test"));
-    } catch (IOException ioe) {
+  public void testServiceClassifiers()
+  {
+    try
+    {
+      var service = client.getService("example");
+      assertEquals(service.getClassifiers(),
+              List.of("Topic=Example", "Category=Tutorials", "Show=False"));
+    } catch (IOException ioe)
+    {
       fail("connection error", ioe);
     }
   }
 
   @Test
-  public void testServiceUrl() {
-    try {
-      var service = client.getService("service-1");
-      assertEquals(service.getURL(), slivkaUrl.resolve("api/services/service-1"));
-    } catch (IOException ioe) {
+  public void testServiceUrl()
+  {
+    try
+    {
+      var service = client.getService("example");
+      assertEquals(service.getUrl(),
+              slivkaUrl.resolve("api/services/example"));
+    } catch (IOException ioe)
+    {
       fail("connection error", ioe);
     }
   }

@@ -13,3 +13,7 @@ template.html
 
 Main*.java
 test-output/
+**/.gradle
+**/build
+**/.project
+**/.classpath

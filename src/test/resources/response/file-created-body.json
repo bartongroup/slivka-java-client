@@ -1,9 +1,9 @@
 {
-  "statuscode": 201,
-  "uuid": "YaSJJBbMVOcsHRcaDSTvos",
-  "title": "filename.txt",
-  "label": "uploaded",
-  "mimetype": "text/plain",
-  "URI": "/slivka/api/files/YaSJJBbMVOcsHRcaDSTvos",
-  "contentURI": "/slivka/media/uploads/mgug4urh"
+  "@content": "/media/uploads/au3Z9MYqgTw94Ny2",
+  "@url": "/api/files/au3Z9MYqgTw94Ny2",
+  "id": "au3Z9MYqgTw94Ny2",
+  "jobId": null,
+  "label": "filename.txt",
+  "mediaType": "text/plain",
+  "path": "au3Z9MYqgTw94Ny2"
 }
