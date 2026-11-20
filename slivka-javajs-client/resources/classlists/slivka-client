@@ -1,0 +1,9 @@
+uk/ac/dundee/compbio/slivkaclient/JobRequest.js
+uk/ac/dundee/compbio/slivkaclient/Job.js
+uk/ac/dundee/compbio/slivkaclient/SlivkaClientImpl.js
+uk/ac/dundee/compbio/slivkaclient/Parameter.js
+uk/ac/dundee/compbio/slivkaclient/http/impl/ApacheHttpClient.js
+uk/ac/dundee/compbio/slivkaclient/SlivkaService.js
+uk/ac/dundee/compbio/slivkaclient/RequestValues.js
+uk/ac/dundee/compbio/slivkaclient/SlivkaClient.js
+uk/ac/dundee/compbio/slivkaclient/RemoteFile.js
